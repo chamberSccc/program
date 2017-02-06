@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>产品祥情</title>
+  <link href="../css/base.css" type="text/css" rel="stylesheet" /> 
+  <link href="../css/main.css" type="text/css" rel="stylesheet" /> 
+  <link href="../dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
+  <script src="../js/jquery.js"></script> 
+    <script src="../dist/bootstrap/js/bootstrap.min.js"></script> 
+     <script src="../js/fly.js"></script>
+     <script src="../js/requestAnimationFrame.js"></script> 
+  <script src="../js/pintuer.js"></script> 
+
+</head>
+<body>
+<!--nav-->
+<nav id="nav-index" class="clearfix">
+	<section class="container">
+        <a href="#" class="fl home">澹泊商贸</a>
+        <a href="#" class="fr button" data-num="0"><i id="end" class="glyphicon glyphicon-align-justify"></i></a>
+        <div style="position:fixed; top:1px; right:35px; z-index:10000; width:1px; height:52px; line-height:52px; font-size:20px; text-align:center; color:#fff; background:#b1d8ee; display:none" id="msg">已成功加入购物车！</div> 
+    </section>
+</nav>
+<!--/nav-->
+<!--details-pc-->
+<section id="details-pc" class="hidden-xs clearfix container mt15">
+	<section class="fl bigImg">
+    	<img id="detailbig0"  style="display:block;bottom: 200px" class="img-responsive aligncenter">
+    	<img id="detailbig1"  class="img-responsive aligncenter">
+    	<img id="detailbig2"  class="img-responsive aligncenter">
+    	<img id="detailbig3"  class="img-responsive aligncenter">
+    	<img id="detailbig4"  class="img-responsive aligncenter">
+    </section>
+    <ul class="fl imgList">
+    	<li class="up"></li>
+        <div>
+        	<section>
+                <li><img id="detailsmall0" style="height: 50px;width: 85px"  class="img-responsive aligncenter"></li>
+                <li><img id="detailsmall1" style="height: 50px;width: 85px"  class="img-responsive aligncenter"></li>
+                <li><img id="detailsmall2" style="height: 50px;width: 85px"  class="img-responsive aligncenter"></li>
+                <li><img id="detailsmall3" style="height: 50px;width: 85px"  class="img-responsive aligncenter"></li>
+                <li><img id="detailsmall4" style="height: 50px;width: 85px"  class="img-responsive aligncenter"></li>
+            </section>
+        </div>
+    	<li class="down"></li>
+    </ul>
+    <section class="fl des">
+    	<h1 id="name">最新商洛茶 商洛茶 春季新茶</h1>
+    	<p><span>商品描述:</span><span id="describe">炭烧口味</span></p>
+        <p><span>生长季节:</span><span id="season">春季</span></p>
+        <p><span>产地:</span><span id="address">福建省厦门市湖里区悦华路</span></p>
+        <p><span>储藏方法:</span><span id="saveMethod">避光、防潮、防异味</span></p>
+        <p><span>净含量:</span><span id="volume">锌合金电镀</span></p>
+        <p><span>口味:</span><span id="taste">炭烧口味</span></p>
+        <p> &nbsp</p>
+        <span>价格:</span><span style="text-decoration:line-through;" id="price">￥2850 RMB</span><span>会员价:</span><span style="color: red" id="vipprice">￥280</span>
+    </section>
+</section>
+<!--/details-pc-->
+<!--footer-->
+<footer  style="position: absolute;bottom: 0;left: 0;right: 0">
+	<section class="container">
+        <p>Copyright  2006-2015  Xi'an DanBo Business Company All Rights Reserved.</p>
+        <p class="mr">            
+            电话: 111111111<br>
+        </p>
+        <dl>
+            <dt>关于澹泊</dt>
+            <dd><a href="#">澹泊文化</a></dd>
+        </dl>
+        <dl>
+            <dt>联系我们</dt>
+            <dd><a href="#">澹泊客服</a></dd>
+            <dd><a href="#">帮助反馈</a></dd>
+            <dd><a href="#">微信公众号</a></dd>
+        </dl>
+        <dl>
+            <dt>产品中心</dt>
+            <dd><a href="#">茶叶系列</a></dd>
+        </dl>
+    </section>
+</footer>
+<!--/footer-->
+<script>
+$(function(){
+	$(".imgList li").click(function(){
+		var i = $(this).index();
+		$(".bigImg img").eq(i).show().siblings().hide();
+	});
+	
+	$(document).ready(function() {
+		var params= window.location.search;
+		var paramsarr = params.substring(1).split(",");
+		//获取url值
+		var imgurl = paramsarr[0].substring(14);
+		    var requestURL = "../../DanboBusiness/shop/getGoodsDetail/"+imgurl;
+		$.ajax({  
+			type : "GET",  
+		    url : requestURL,  
+		    async : false,  
+		    cache : false,  
+		    success : function(resultData) {  
+		    if(resultData == 'notUploadByShopper'){		
+				alert('商家未上传商品图片');
+		    }else if(resultData == 'false'){
+				alert(' 信息加载出错');
+			}else{
+				//商品详情
+				 var imageJson =resultData.imageInfo;
+				 $("#name").html(imageJson[0].goodsname);
+				 $("#price").html(imageJson[0].goodsprice);
+				 $("#describe").html(imageJson[0].describe);
+				 $("#volume").html(imageJson[0].volume);
+				 $("#vipprice").html(imageJson[0].vipprice);
+				 //商品细节图片
+				 var detailJson = resultData.imageDetail;
+				 var detailJsonlength = detailJson.length;
+				 for(var i=0;i<detailJsonlength;i++){
+					 var imgbigName = "detailbig" + i.toString();
+					 var imgSmallName = "detailsmall" + i.toString();
+					 $("#"+imgbigName).attr('src',detailJson[i].url);
+					 $("#"+imgSmallName).attr('src',detailJson[i].url);					 
+				 }
+			}
+          } 
+        });
+	});	
+
+})
+</script>
+</body>
+</html>

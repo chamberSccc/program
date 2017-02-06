@@ -1,0 +1,103 @@
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>确认购买</title> 
+  <link rel="stylesheet" href="../css/min.css" /> 
+  <link rel="stylesheet" href="../css/min_123.css" /> 
+  <script src="../js/jquery.js"></script> 
+  <script type="text/javascript">
+$(function(){
+    $('.reginpblu-yqm').hide();
+    $(".regerror2").toggle(function(){
+        $(this).find("span").attr("class","nle-sicon2")
+        $(this).parent().find(".reginpblu-yqm").show();  
+    },function(){
+        $(this).find("span").attr("class","nle-sicon")   
+        $(this).parent().find(".reginpblu-yqm").hide();   
+    })
+})  
+</script> 
+ </head> 
+ <body id="invest_content"> 
+  <div class="ctn-960 mg shadow-5"> 
+   <form action="#" class="js-form-validate" method="post" onsubmit="return false" data-arg-one="#" data-arg-two="100"> 
+    <div class="confirm-info-list mgt clearfix" style="position: relative; margin:0 auto;"> 
+     <dl class="confirm-info-list-dl confirm-info-list-project"> 
+      <dt class="tc1-title"> 
+       <h2>选择支付方式</h2> 
+      </dt> 
+      <dd class="clearfix"> 
+       <ul class="list-style-1 list-style-1-first"> 
+        <li>电子积分：<span id="escore"></span></li> 
+        <li>账户余额：<span id="balance"></span></li> 
+        <li>使用电子积分：<span><input id="agree-protocol" name="agree-protocol" type="checkbox" checked="false" />&nbsp;&nbsp;使用余额：<input id="agree-protocol" name="agree-protocol" type="checkbox" checked="fasle" /> </span></li> 
+       </ul> 
+       <ul class="list-style-1 list-style-1-two"> 
+        <li>支付方式：<span><select size="1" style="width:148px;" class="form-control"> <option>支付宝</option> <option>微信</option><option>网上银行</option> </select></span></li>  
+        <li><span>本次返还积分：</span><span></span></li>        
+        <li><span>商品总金额：</span><span style="color: red" id="price"></span></li> 
+       </ul> 
+      </dd> 
+     </dl> 
+     <dl class="confirm-info-list-dl"> 
+      <dt class="tc1-title"> 
+       <h2>确认购买</h2> 
+      </dt> 
+      <dd>  
+       <div class="confirmationForm clearfix"> 
+        <div id="invest-paypwd"> 
+         <ul class="agree-protocol"> 
+          <li> <label class="plain-text"><span class="td-name" style="font-weight:bolder;">收货地址：</span><span class="plain-text"> <input type="password" value="" placeholder="请输入收货地址" /> </span></label> </li> 
+          <li> <label class="plain-text"><span class="td-name" style="font-weight:bolder;">支付密码：</span><span class="plain-text"> <input type="password" value="" placeholder="请输入支付密码" /> </span></label> </li> 
+          <li> <label class="plain-text"><span class="td-name" style="font-weight:bolder;">验 证 码：</span><span class="input-text input-vcode"> <input id="valicode" name="valicode" class="valicode_1 input-fucus" type="text" maxlength="4" style="width:80px;margin-right:10px" tabindex="2" /> </span><span class="vcode"> <img id="vcodeImg" alt="点击刷新" title="点击刷新" class="yanzhengma" src="#" /> </span><a style="margin-left:6px;font-size:12px;color:#bdbdbd;" id="vcodeA"> 看不清换一个<span class="pro_tips-1" _title="验证码有效时间15分钟"> </span></a> <input type="hidden" name="id" value="#" /> </label> 
+           <div class="error-container error" id="form-invest-confirm-error-vcode"></div> </li> 
+          <li> <label class="input-checkbox" style="font-size:12px;display:inline;"> <input id="agree-protocol" name="agree-protocol" type="checkbox" checked="true" /> 我已阅读并同意<a href="#" style="color:#E24F1A" target="_blank">《西安澹泊商贸有限公司》</a>用户协议</label> </li> 
+         </ul> 
+         <div class="invest-btn-line"> 
+          <input tabindex="3" id="confirm-btn" type="button" value="确认购买" class="i-p-c-i-btn clearButton" /> 
+         </div> 
+        </div> 
+       </div> 
+      </dd> 
+     </dl> 
+    </div> 
+   </form> 
+  </div> 
+<script type="text/javascript">
+
+jQuery(function($){
+	$(document).ready(function(){
+		var params = window.location.search;
+		var paramsarr = params.substring(1).split(",");
+		var totalPrice = paramsarr[0].substring(6);
+		$("#price").html(totalPrice);
+	});
+	//确认购买
+	$("#confirm-btn").on('click',function(){
+		var params = window.location.search;
+		var paramsarr = params.substring(1).split(",");
+		var totalPrice = paramsarr[0].substring(6);
+	});
+	$(document).ready(function(){
+    var requestURL = "../../DanboBusiness/user/getUserInfo";
+		$.ajax({  
+			type : "GET",  
+		    url : requestURL,  
+		    async : false,  
+		    cache : false,  
+		    success : function(resultData) {  
+		    if(resultData.message == 'error'){		
+				alert('登录超时');
+				window.location.href="../login.html";
+		    }else{
+				var userjson = resultData.message;	
+				$("#escore").html(userjson.eScore);
+				$("#balance").html(userjson.balance);			
+			}
+          } 
+        });
+	});
+});	
+</script> 
+ </body>
+</html>

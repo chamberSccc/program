@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>个人首页</title>  
+    <link rel="stylesheet" href="../css/pintuer.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="../dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
+    <link href="../dist/css/sb-admin-2.min.css" rel="stylesheet"/>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/pintuer.js"></script>  
+</head>
+<body>
+ <div> 
+  <div class="row"> 
+  <div class="panel-head"><strong><span class="icon-pencil-square-o"></span> 网站信息</strong></div>
+     <!-- /.col-lg-12 --> 
+    </div> 
+    <!-- /.row --> 
+    <div class="row"> 
+     <div style="width: 600px;float: left" class="col-lg-8"> 
+      <div id="one" style="height: 300px;margin-bottom:10px" class="panel panel-primary"> 
+       <div class="panel-heading">
+         奖金统计 
+       </div> 
+       <div style="width: 400" class="panel-body"> 
+		   <p><a id="bonus1" href="#">link anchor text</a></p>
+		   <p><a id="bonus2" href="#">link anchor text</a></p>
+		   <p><a id="bonus3" href="#">link anchor text</a></p>
+		   <p><a id="bonus4" href="#">link anchor text</a></p>
+		   <p><a id="bonus5" href="#">link anchor text</a></p>
+		   <p><a id="bonus6" href="#">link anchor text</a></p>
+       </div> 
+      </div> 
+     </div> 
+     <div style="float: left;left:600px;right: 30px;position: absolute"> 
+      <div id="two" style="height: 300px;margin-bottom:10px" class="panel panel-primary"> 
+       <div class="panel-heading">
+         个人信息 
+       </div> 
+       <div class="panel-body"> 
+        <p>会员编号:&nbsp;&nbsp;&nbsp;<span>aaaaaaaaaa</span></p> 
+        <p>会员昵称:&nbsp;&nbsp;&nbsp;<span>aaaaaaaaaa</span></p> 
+        <p>收入总计:&nbsp;&nbsp;&nbsp;<span>aaaaaaaaaa</span></p> 
+        <p>奖励积分:&nbsp;&nbsp;&nbsp;<span>aaaaaaaaaa</span></p> 
+        <p>重复消费:&nbsp;&nbsp;&nbsp;<span>aaaaaaaaaa</span></p> 
+        <p>消费积分:&nbsp;&nbsp;&nbsp;<span>aaaaaaaaaa</span></p> 
+        <p>直推人数:&nbsp;&nbsp;&nbsp;<span>aaaaaaaaaa</span></p> 
+       </div> 
+      </div> 
+     </div> 
+     
+    </div> 
+    <div class="row"> 
+      <div id="three" style="height: 300px;position: absolute;left: 0px;right: 30px" class="panel panel-primary"> 
+       <div class="panel-heading">
+         最新留言 
+       </div> 
+       <div class="panel-body"> 
+		   <p><a id="notice1" href="#">link anchor text</a></p>
+		   <p><a id="notice2" href="#">link anchor text</a></p>
+		   <p><a id="notice3" href="#">link anchor text</a></p>
+		   <p><a id="notice4" href="#">link anchor text</a></p>
+		   <p><a id="notice5" href="#">link anchor text</a></p>
+		   <p><a id="notice6" href="#">link anchor text</a></p>
+       </div> 
+     </div> 
+    </div> 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+     <div class="modal-dialog"> 
+      <div class="modal-content"> 
+       <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+        <h4 class="modal-title" id="myModalLabel">您确定要退出控制面板吗?</h4> 
+       </div> 
+       <div class="modal-footer"> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+        <button type="button" class="btn btn-primary">Ok</button> 
+       </div> 
+      </div> 
+      <!-- /.modal-content --> 
+     </div> 
+     <!-- /.modal-dialog --> 
+    </div> 
+<script>
+	//页面开始从数据库加载商品信息
+$(document).ready(function() {
+    var requestURL = "../../DanboBusiness/user/getPersonalInfo";
+    $.ajax({
+        type: "GET",
+        url: requestURL,
+        async: false,
+        cache: false,
+        success: function(resultData) {
+            if (resultData == null) {
+	            alert("页面加载失败,请稍后重试");
+            } else {
+	            var personaljson = resultData.personal;
+	            var messagejson = resultData.message;   
+	            var personaljsonlength = personaljson.length;   
+	            var personaljsonlength = messagejson.length;     
+				for(var i=0;i<personaljsonlength;i++){
+					var noticename = "notice"+ (i+1).toString();
+					$("#"+noticename).html(messagejson[i].info);
+				}
+				for(var j=0;j<personaljsonlength;j++){
+					var bonusname = "bonus"+ (j+1).toString();
+					$("#"+bonusname).html(personaljson[j].info);
+				}
+				
+			 }
+        }
+    });
+});
+</script>
+</body>
+</html>
