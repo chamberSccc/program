@@ -1,0 +1,217 @@
+<!-- <!doctype html> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js绘制数学函数</title>
+</head>
+
+<body>
+    <div id="main" style="border-bottom:solid red 0px;height:400px;width:400px"></div>
+    <textarea id="textarea" style="float:right;position: absolute;top: 1px;right: 1px;height: 800px;"></textarea>
+	<p style="position: absolute;left:90px;top: 0;font-size: large;">Y</p>
+	<p style="position: absolute;left:330px;top: 223px;font-size: large;">X</p>
+
+</body>
+
+    <script>
+        function $(id){return document.getElementById(id)};
+        /*     绘图对象        */
+        var Plot = {
+            container : null , //画布
+            ox : 500 , //原点x
+            oy : 300 , //原点y
+            baseLineColor : 'black' , //坐标轴颜色
+            brushColor : 'black' , //画笔颜色
+            brushWeight : 1 , //画笔粗细
+
+            baseLineX : null , // baseLineX 和 baseLineY 用于坐标移位
+            baseLineY : null ,
+
+            //初始化方法
+            init : function(containerId , ox , oy , baseLineColor , brushColor , brushWeight ){
+                if($(containerId)){
+                    Plot.container = $(containerId);
+                }else{
+                    alert('你必须制定一个区域作为画布！');
+                    return;
+                }
+                if((typeof ox) == 'number'){
+                    Plot.ox = ox ;
+                }
+                if((typeof oy)== 'number'){
+                    Plot.oy = oy ;
+                }
+                Plot.baseLineColor = baseLineColor ;
+                Plot.brushWeight = brushWeight ;
+                Plot.brushColor = brushColor ;
+                Plot.drawCoordinate();
+            },
+
+            //设置原点函数
+            setOPoint : function(ox,oy){
+                Plot.ox = ox ;
+                Plot.oy = oy ;
+                Plot.container.removeChild(Plot.baseLineX) ;
+                Plot.container.removeChild(Plot.baseLineY) ;
+                Plot.drawCoordinate();
+            },
+
+            //设置画笔粗细函数
+            setBrushWeight : function(weight){
+                Plot.brushWeight = weight ;
+            },
+            setBrushColor : function(color){
+                Plot.brushColor = color ;
+            },
+
+            // 画坐标轴
+            drawCoordinate : function(){
+                var baseLineX = document.createElement('div') ;
+                baseLineX.style.position = 'absolute' ;
+                baseLineX.style.left = 30 ;
+                baseLineX.style.top = Plot.oy ;
+                baseLineX.style.fontSize = '1px' ;
+                baseLineX.style.height = '1px' ;
+                baseLineX.style.width = '320px' ;
+                baseLineX.style.overflow = 'hidden' ;
+                baseLineX.style.backgroundColor = Plot.baseLineColor ;
+                Plot.container.appendChild(baseLineX) ;
+                Plot.baseLineX = baseLineX ;
+
+                var baseLineY = document.createElement('div') ;
+                baseLineY.style.position = 'absolute' ;
+                baseLineY.style.left = Plot.ox ;
+                baseLineY.style.top = 5 ;
+                baseLineY.style.fontSize = '1px' ;
+                baseLineY.style.height = '270px' ;
+                baseLineY.style.width = '1px' ;
+                baseLineY.style.overflow = 'hidden' ;
+                baseLineY.style.backgroundColor = Plot.baseLineColor ;
+                Plot.baseLineY = baseLineY ;
+                Plot.container.appendChild(baseLineY) ;
+            },
+
+            //清理画布
+            clean : function(){
+                Plot.container.innerHTML = '' ;
+                Plot.drawCoordinate() ;
+            },
+
+            //画点，相对原点
+            drawDot : function(x,y,brushWeight){
+                var dot = document.createElement('div') ;
+                dot.style.left = Plot.ox + x + 'px' ;
+                dot.style.top = Plot.oy - y + 'px' ;
+                dot.style.height = brushWeight;
+                dot.style.width = brushWeight;
+                dot.style.position = 'absolute' ;
+                dot.style.fontSize = '1px' ;
+                dot.style.backgroundColor = Plot.brushColor ;
+                dot.style.overflow = 'hidden' ;
+                Plot.container.appendChild(dot) ;
+                dot = null ;
+
+            },
+            // 画圆，radius是半径，（xi,yi）为圆心,圆的brushweight
+            circle : function(radius,xi,yi,brushWeight){
+                if((typeof xi)=='undefined'){
+                    xi = 0 ;
+                };
+                if((typeof yi)=='undefined'){
+                    yi = 0 ;
+                };
+                // 以i为角度,从0到360
+                var i = 0 ;
+                while(i<90){
+                    var _x0 = Math.sin(i/180*Math.PI)*radius ;
+                    var _y0 = Math.cos(i/180*Math.PI)*radius ;
+                    var step = radius/100 ; // 使画出来的圆更圆润
+                    if(1/step > 1){
+                        step = 1 ;
+                    }else if(1/step < 0.2){
+                        step = 0.2 ;
+                    }else{
+                        step = 1/step ;
+                    };
+                    Plot.drawDot(_x0+xi,_y0+yi,brushWeight) ;
+                    i = i + step ;
+                }
+            },
+
+            //画线 从 (x0,y0) 到 (x1,y1)
+            line : function(x0,y0,x1,y1,brushWeight){
+            	// 竖线
+                if((x1-x0)==0){ 
+                    for(var i=((y1>y0)?y0:y1) ; i<((y1>y0)?y1:y0); i++ ){
+                        Plot.drawDot(x1,i,brushWeight);
+                    };
+                    return;
+                };
+                //横线
+                if((y1-y0)==0){
+                    for( var i=((x1>x0)?x0:x1); i<((x1>x0)?x1:x0); i++ ){
+                        Plot.drawDot(i,y1,brushWeight);
+                    };
+                    return;
+                };
+                //斜线
+                //K=斜率，直线方程 y=kx + b;
+                var k = (y1-y0)/(x1-x0) ;
+                if(k<=1){
+                    for(var i=((x1>x0) ? x0 : x1); i<((x1>x0) ? x1 : x0 );i++){
+                        Plot.drawDot(i,k*i+y1-k*x1,brushWeight);
+                    };
+                }else{
+                    for(var i=((y1>y0)?y0:y1) ; i<((y1>y0)?y1:y0) ; i++){
+                        Plot.drawDot((i-y1+k*x1)/k,i,brushWeight) ; 
+
+                    };
+                };
+                return;
+            }, 
+        }
+    </script>
+    
+    
+
+    <!-- test -->
+    <!--<script>
+        for(i=1;i<=1000;i++){
+        	var a = Math.floor(Math.random()*97);
+        	var b = a%6;
+        	var textobject = document.getElementById('textarea');
+  			textobject.innerHTML +="("+a+","+b+")\r\n"; 
+  			Plot.brushColor="black";
+        }
+    </script>-->
+         <script>
+        var count = 0;
+    	//主容器 x y原点位置 (x距离左边位置  y距离上边位置),坐标轴颜色,图画对象颜色,线权重
+    	//现坐标轴为400*300
+        Plot.init('main',100, 240,'black','black',1); 
+        //画线 从 (x0,y0) 到 (x1,y1),新增第四个参数为各自画笔权重,此处为坐标系箭头
+        Plot.line(250,0,243,4,1);
+        Plot.line(250,0,243,-4,1);
+        Plot.line(0,235,4,228,1);
+        Plot.line(0,235,-4,228,1);
+        //横线和竖线,圈定抽样空间
+        Plot.line(0,200,200,200,1);
+        Plot.line(200,0,200,200,1); 
+        Plot.circle(200,0,0,1.5);
+        for(i=1;i<=10000;i++){
+        	var a = Math.floor(Math.random()*200);
+        	var b = Math.floor(Math.random()*200);
+        	if(a*a + b*b <= 40000){
+        		Plot.brushColor="red";
+        		count++;
+        	}
+        	Plot.drawDot(a,b,3);
+        	var textobject = document.getElementById('textarea');
+  			textobject.innerHTML +="("+a+","+b+")\r\n"; 
+  			Plot.brushColor="black";
+        }
+        document.write("红点个数="+count); 	
+    </script> 
+  
+    
+</html>
