@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <meta name="renderer" content="webkit" /> 
+  <title>购物车</title> 
+  <link rel="stylesheet" href="../css/pintuer.css" /> 
+  <link rel="stylesheet" href="../css/admin.css" /> 
+  <link href="../dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
+  <link href="../dist/css/sb-admin-2.min.css" rel="stylesheet" /> 
+  <script src="../js/jquery.js"></script> 
+  <script src="../js/pintuer.js"></script> 
+  <script src="../dist/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../dist/datatables/js/jquery.dataTables.min.js"></script> 
+  <script src="../dist/datatables-plugins/dataTables.bootstrap.min.js"></script> 
+  <script src="../dist/datatables-responsive/dataTables.responsive.js"></script> 
+ </head> 
+ <body> 
+<div style="min-height: 1024px" class="panel admin-panel">
+  <div class="panel-head"><strong class="icon-reorder">购物车</strong></div>
+  <table  style="width: 1024px" class="table table-hover text-center" id="dataTables-example">
+	<thead>  
+    <tr>
+           <th>序号</th> 
+           <th>商品名称</th> 
+           <th id="price">价格</th> 
+           <th>状态</th> 
+           <th>操作</th>
+    </tr>
+    </thead>
+  </table>
+<div class="field">	
+	<button style="position: absolute;right: 50px" id="submit-btn"  class="button bg-main icon-check-square-o">提交订单</button>
+</div>
+</div>
+
+
+ <script type="text/javascript">
+var table = null;
+$(document).ready(function() {
+    table = $("#dataTables-example").dataTable({
+        "bFilter": false,
+        "responsive": true,
+        "ajax": {
+            url: "../../DanboBusiness/shop/getShopCart",
+            type: "GET"
+        },
+        //"sAjaxSource": "../../DanboBusiness/shop/getShopCart",
+        "columns": [{
+            "data": "id",
+            "sClass": "center",
+        },
+        {
+            "data": "goodsname",
+            "sClass": "center",
+        },
+        {
+            "data": "price",
+            "sClass": "center",
+        },
+        {
+            "data": "state",
+            "sClass": "center",
+        }],
+        columnDefs: [{
+            //   指定第一列，从0开始，0表示第一列，1表示第二列……
+            targets: 4,
+            render: function(data, type, row, meta) {
+                return '<a class="button border-red" id="del-btn" href="#" onclick="del(' + row.id + ',\'' + row.goodsname + '\')" ><span class="icon-trash-o"></span></a>'
+            } //
+        }],
+        "bAutoWidth": true,
+        //自适应宽度
+        "sPaginationType": "full_numbers",
+        "oLanguage": {
+            "sLengthMenu": "每页显示 _MENU_ 条记录",
+            "sZeroRecords": "正在加载中...",
+            "sEmptyTable": "您还未加入商品进入购物车!",
+            "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 件商品",
+            "sInfoEmpty": "显示0到0条记录",
+            "sInfoFiltered": "数据表中共为 _MAX_ 条记录",
+            "sSearch": "搜索",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "末页"
+            }
+        }
+    });
+
+});
+//提交订单按钮
+jQuery(function($) {
+    $("#submit-btn").on('click',
+    function() {
+	    //获取价格列索引
+	    var idx   = table.api().column($("#price")).index();
+	    var total = table.api().column(idx).data().reduce(function(a,b){return a*1+b*1;});
+		window.open("pay.html?total="+total,'right','',false);
+	});
+});
+//获取选中行数据,用户可删除购物车数据
+function del(id, goodsname) {
+    var requestURL = "../../DanboBusiness/shop/deleteShopCart/" + id;
+    $.ajax({
+        type: "GET",
+        url: requestURL,
+        async: false,
+        cache: false,
+        success: function(resultData) {
+            if (resultData.message == 'success') {
+                //如果后台删除成功，则刷新表格，并提示用户删除成功
+                //保留分页信息
+                table.api().ajax.reload(null, false);
+                alert("商品" + goodsname + "删除成功");
+            } else {
+                alert("删除失败");
+            }
+        }
+    });
+}
+</script> 
+</body>
+</html>

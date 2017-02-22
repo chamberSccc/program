@@ -1,0 +1,249 @@
+﻿<Window x:Class="midFrequence.Timing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="定时开关机设置" Height="600" Width="800" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="QuartzMSFont">
+            <Setter Property="TextElement.FontFamily" Value="Resources/#Digiface"/>
+        </Style>
+    </Window.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="0.4*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.6*" />
+            <ColumnDefinition Width="0.4*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Blue" Header="定时开关机设置" HorizontalAlignment="Stretch" Margin="10,10,10,98" Name="groupBox2" Padding="10" VerticalAlignment="Stretch">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9" Content="启用定时开关机" FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0" Name="chkTimeEnable" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <CheckBox Grid.Row="1" Grid.Column="0" Content=" 1    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="chkTime1" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <CheckBox Grid.Row="2" Grid.Column="0" Content=" 2    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="chkTime2" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <CheckBox Grid.Row="3" Grid.Column="0" Content=" 3    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="chkTime3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <CheckBox Grid.Row="4" Grid.Column="0" Content=" 4    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="chkTime4" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <!--<CheckBox Grid.Row="5" Grid.Column="0" Content=" 5    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="chkTime5" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <CheckBox Grid.Row="6" Grid.Column="0" Content=" 6    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="chkTime6" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />-->
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="1" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONH1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="2" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONH2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="3" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONH3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="4" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONH4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <!--<TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="5" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONH5" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="6" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONH6" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />-->
+                <Label Grid.Row="1" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label7" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="2" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label8" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label9" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="4" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label10" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <!--<Label Grid.Row="5" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label11" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="6" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label12" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />-->
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="1" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONM1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="2" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONM2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="3" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONM3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="4" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONM4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <!--<TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="5" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONM5" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="6" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtONM6" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />-->
+                <Label Grid.Row="1" Grid.Column="4" Content="分    关机：" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label13" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="2" Grid.Column="4" Content="分    关机：" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label14" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="4" Content="分    关机：" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label15" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="4" Grid.Column="4" Content="分    关机：" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label16" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <!--<Label Grid.Row="5" Grid.Column="4" Content="分    关机：" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label17" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="6" Grid.Column="4" Content="分    关机：" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label18" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />-->
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="1" Grid.Column="5" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFH1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="2" Grid.Column="5" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFH2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="3" Grid.Column="5" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFH3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="4" Grid.Column="5" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFH4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <!--<TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="5" Grid.Column="5" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFH5" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="6" Grid.Column="5" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFH6" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />-->
+                <Label Grid.Row="1" Grid.Column="6" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label19" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="2" Grid.Column="6" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label20" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="6" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label21" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="4" Grid.Column="6" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label22" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <!--<Label Grid.Row="5" Grid.Column="6" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label23" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="6" Grid.Column="6" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label24" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />-->
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="1" Grid.Column="7" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFM1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="2" Grid.Column="7" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFM2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="3" Grid.Column="7" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFM3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="4" Grid.Column="7" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFM4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <!--<TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="5" Grid.Column="7" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFM5" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="6" Grid.Column="7" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="txtOFFM6" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />-->
+                <Label Grid.Row="1" Grid.Column="8" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label25" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="2" Grid.Column="8" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label26" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="8" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label27" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="4" Grid.Column="8" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label28" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <!--<Label Grid.Row="5" Grid.Column="8" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label29" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="6" Grid.Column="8" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" Name="label30" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />-->
+                <ComboBox Name="cmbPeriod1" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="1" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <ComboBox Name="cmbPeriod2" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="2" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <ComboBox Name="cmbPeriod3" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="3" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <ComboBox Name="cmbPeriod4" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="4" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <!--<ComboBox Name="cmbPeriod5" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="5" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <ComboBox Name="cmbPeriod6" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="6" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>-->
+
+            </Grid>
+        </GroupBox>
+        <Border  Grid.Row="1" Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" CornerRadius="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" Name="border37">
+            <Grid Margin="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Click="btnNUM_Click" Content="1" FontSize="18" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" Margin="1" Name="btnOne" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="2" FontSize="18" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="1" Name="btnTwo" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="3" FontSize="18" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Margin="1" Name="btnThree" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="4" FontSize="18" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Margin="1" Name="btnFour" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="5" FontSize="18" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Margin="1" Name="btnFive" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="6" FontSize="18" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Margin="1" Name="btnSix" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="7" FontSize="18" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" Margin="1" Name="btnSeven" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="8" FontSize="18" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Margin="1" Name="btnEight" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="9" FontSize="18" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" Margin="1" Name="btnNine" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="0" FontSize="18" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" Margin="1" Name="btnZero" VerticalAlignment="Stretch" />
+                <Button Click="btnNUM_Click" Content="清除" FontSize="18" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Stretch" Margin="1" Name="btnClear" VerticalAlignment="Stretch" />
+                <Button Click="btnOK_Click" Content="确定" FontSize="18" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" Margin="5,1,5,1" Name="btnOK" VerticalAlignment="Stretch" />
+                <Button Content="取消" FontSize="18" Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Stretch" IsCancel="True" Margin="5,1,5,1" Name="btnCancel" VerticalAlignment="Stretch" />
+            </Grid>
+        </Border>
+        <GroupBox Grid.Column="0" Foreground="Blue" Header="星期二开关机设置" HorizontalAlignment="Stretch" Margin="10,245,10,10" Name="groupBox3" Padding="10" VerticalAlignment="Stretch" Grid.RowSpan="2">
+            <Grid Margin="0,0,0,-32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                    <RowDefinition  Height="35"/>
+                </Grid.RowDefinitions>
+                <CheckBox Grid.Row="0" Grid.Column="0" Content=" 1    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="tueTime1" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <Label Content="关机 :" Grid.Column="0" Grid.Row="1" FontSize="16" Grid.ColumnSpan="3" Margin="46,2,0,33" Grid.RowSpan="2"/>
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="0" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONH1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="1" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFH1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <Label Grid.Row="0" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="1" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="0" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONM1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="1" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFM1" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <Label Grid.Row="0" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="1" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+
+                <CheckBox Grid.Row="2" Grid.Column="0" Content=" 2    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="tueTime2" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <Label Content="关机 :" Grid.Column="0" Grid.Row="3" FontSize="16" Grid.ColumnSpan="2" Margin="46,3,22,38" Grid.RowSpan="2"></Label>
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="2" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONH2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="3" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFH2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <Label Grid.Row="2" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="2" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONM2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="3" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFM2" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <Label Grid.Row="2" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+
+                <CheckBox Grid.Row="4" Grid.Column="0" Content=" 2    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="tueTime3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <Label Content="关机 :" Grid.Column="0" Grid.Row="5" FontSize="16" Grid.ColumnSpan="2" Margin="46,3,22,38" Grid.RowSpan="2"></Label>
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="4" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONH3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="5" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFH3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <Label Grid.Row="4" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="5" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="4" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONM3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="5" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFM3" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <Label Grid.Row="4" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="5" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+
+                <CheckBox Grid.Row="6" Grid.Column="0" Content=" 2    开机：" FontSize="16" HorizontalAlignment="Stretch" Margin="0" Name="tueTime4" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+                <Label Content="关机 :" Grid.Column="0" Grid.Row="7" FontSize="16" Grid.ColumnSpan="2" Margin="46,3,22,38" Grid.RowSpan="2"></Label>
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="6" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONH4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="7" Grid.Column="1" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFH4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="H" />
+                <Label Grid.Row="6" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="7" Grid.Column="2" Content="时" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="6" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtONM4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <TextBox Style="{DynamicResource QuartzMSFont}" Grid.Row="7" Grid.Column="3" Background="Black" FontSize="20" Foreground="Lime" GotFocus="TextBox_GotFocus" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="3" Name="tuetxtOFFM4" PreviewMouseDown="TextBox_PreviewMouseDown" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Tag="M" />
+                <Label Grid.Row="6" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <Label Grid.Row="7" Grid.Column="4" Content="分" FontSize="16" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" />
+                <ComboBox Name="tueCmbPeriod1" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="0" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <ComboBox Name="tueCmbPeriod2" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="2" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <ComboBox Name="tueCmbPeriod3" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="4" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+                <ComboBox Name="tueCmbPeriod4" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="1" FontSize="18" Grid.Row="6" Grid.Column="9">
+                    <ComboBoxItem Content="低功率" />
+                    <ComboBoxItem Content="中功率" />
+                    <ComboBoxItem Content="高功率" />
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

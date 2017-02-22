@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <meta name="renderer" content="webkit" /> 
+  <title>网站信息</title> 
+  <link rel="stylesheet" href="../css/pintuer.css" /> 
+  <link rel="stylesheet" href="../css/admin.css" /> 
+  <link href="../dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
+  <link href="../dist/css/sb-admin-2.min.css" rel="stylesheet" /> 
+  <script src="../js/jquery.js"></script> 
+  <script src="../js/pintuer.js"></script> 
+  <script src="../dist/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../dist/datatables/js/jquery.dataTables.min.js"></script> 
+  <script src="../dist/datatables-plugins/dataTables.bootstrap.min.js"></script> 
+  <script src="../dist/datatables-responsive/dataTables.responsive.js"></script> 
+ </head> 
+ <body> 
+  <div style="min-height: 800px" class="panel admin-panel">
+  <div class="panel-head"><strong class="icon-reorder"> 直属会员</strong></div>
+  <div class="panel-heading">
+         <label>从:</label>
+         <input type="text" style="width: 100px;text-align: center" id="datetimepicker">
+         <label>到:</label>
+         <input type="text" style="width: 100px;text-align: center" id="datetimepicker1">
+          <button type="button" class="btn btn-primary">查找</button>
+  </div> 
+  <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example"> 
+         <thead> 
+          <tr> 
+		    <th>序号</th> 
+           <th>日期</th> 
+           <th>开拓奖</th> 
+           <th>领导奖</th> 
+           <th>服务费</th> 
+           <th>重复消费</th> 
+           <th>管理费</th> 
+           <th>奖金合计</th> 
+          </tr> 
+         </thead> 
+         <tbody> 
+          <tr class="gradeX"> 
+           <td>Misc</td> 
+           <td>Links</td> 
+           <td>Text only</td>
+           <td>Text only</td>  
+           <td class="center">-</td> 
+           <td class="center">X</td> 
+           <td class="center">-</td> 
+           <td class="center">U</td> 
+          </tr> 
+          <tr class="gradeX"> 
+           <td>Misc</td> 
+           <td>Lynx</td> 
+           <td>Text only</td> 
+           <td>Text only</td>  
+           <td class="center">-</td> 
+           <td class="center">X</td> 
+           <td class="center">-</td> 
+           <td class="center">U</td> 
+          </tr> 
+          <tr class="gradeC"> 
+           <td>Misc</td> 
+           <td>IE Mobile</td> 
+           <td>Windows Mobile 6</td> 
+           <td>Text only</td>  
+           <td class="center">-</td> 
+           <td class="center">C</td> 
+           <td class="center">-</td> 
+           <td class="center">U</td> 
+          </tr> 
+          <tr class="gradeC"> 
+           <td>Misc</td> 
+           <td>PSP browser</td> 
+           <td>PSP</td> 
+           <td>Text only</td>  
+           <td class="center">-</td> 
+           <td class="center">C</td> 
+           <td class="center">-</td> 
+           <td class="center">U</td> 
+          </tr> 
+         </tbody> 
+        </table> 
+</div>
+  <script>
+/*
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+	         "bFilter": false,//去掉搜索框
+             "bServerSide": true,//这个用来指明是通过服务端来取数据
+             "sAjaxSource": "../../DanboBusiness/user/getDirMenber",//这个是请求的地址
+             "sPaginationType" : "full_numbers",
+             "aoColumns" : [{
+                "mDataProp" : "id",
+            },{
+                "
+                Prop" : "loginname",
+            }, {
+                "mDataProp" : "nickname",
+            }, {
+                "mDataProp" : "phone",
+            }, ],
+            "oLanguage": {
+			"sLengthMenu": "每页显示 _MENU_ 条记录",
+			"sZeroRecords": "抱歉， 没有找到",
+			"sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+			"sInfoEmpty": "没有数据",
+			"sInfoFiltered" : "数据表中共为 _MAX_ 条记录",
+			"sSearch" : "搜索",
+			"oPaginate": {
+			"sFirst": "首页",
+			"sPrevious": "前一页",
+			"sNext": "后一页",
+			"sLast": "尾页"
+			},
+			"sProcessing": "<img src='./loading.gif' />"
+		}
+	});
+	});
+*/
+$(document).ready(function() {
+    $("#dataTables-example").dataTable({
+        "sAjaxSource": "../../DanboBusiness/user/getDirMenber",
+        //这个是请求的地址
+        "aoColumns": [{
+            "mDataProp": "id",
+        },
+        {
+            "mDataProp": "loginname",
+        },
+        {
+            "mDataProp": "nickname",
+        },
+        {
+            "mDataProp": "phone",
+        },
+        ],
+        "bAutoWidth": true,
+        //自适应宽度
+        "sPaginationType": "full_numbers",
+        "oLanguage": {
+            "sLengthMenu": "每页显示 _MENU_ 条记录",
+            "sZeroRecords": "正在加载中......",
+            "sEmptyTable": "表中无数据存在！",
+            "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 名直属会员",
+            "sInfoEmpty": "显示0到0条记录",
+            "sInfoFiltered": "数据表中共为 _MAX_ 条记录",
+            "sSearch": "搜索",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "末页"
+            }
+        }
+    });
+});
+
+ $('#datetimepicker').datetimepicker({ 
+　　minView: "month", //选择日期后，不会再跳转去选择时分秒 
+　　format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
+　　language: 'zh-CN', //汉化 
+　　autoclose:true //选择日期后自动关闭 
+			});
+    $('#datetimepicker1').datetimepicker({ 
+　　minView: "month", //选择日期后，不会再跳转去选择时分秒 
+　　format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
+　　language: 'zh-CN', //汉化 
+　　autoclose:true //选择日期后自动关闭 
+});
+    
+
+    </script> 
+ </body>
+</html>
