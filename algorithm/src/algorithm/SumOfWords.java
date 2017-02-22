@@ -27,6 +27,9 @@ public class SumOfWords {
 		return map;
 		
 	}
+	/*
+	 *这里其实也不用对map排序，当做扩展了
+	 */
 	public static void SortMap(Map<Character,Integer>  map){
 		
 		List<Map.Entry<Character,Integer>> listData = new ArrayList<Map.Entry<Character,Integer>>(map.entrySet());
