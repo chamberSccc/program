@@ -18,6 +18,7 @@ import algorithm.utilty.ArrayToMap;
  * return [0, 1].
  * 
  * Author: ChenBo
+ * Date :2016.2.23
  */
 public class TwoSum {
 	public static int[] twoSum(int[] nums, int target){
@@ -41,7 +42,7 @@ public class TwoSum {
 		int[] initNum = {2, 7, 11, 15,1,3,5,6,9,6};
 		int target = 12;
 		int[] result = new int[2];
-		result = TwoSum.twoSum(initNum,target);
+		result = twoSum(initNum,target);
 		System.out.println(result[0]+" "+result[1]);
 	}
 }
