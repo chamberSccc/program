@@ -4,6 +4,7 @@ algorithm.string:字符类算法
 algorithm.number:数字类算法
 	TwoSum:两数相加与目标值一致，返回两数数组索引。
 	AddTwoLinkList:两个链表顺序相加，和大于10则进位，返回新链表。
+	LengthOfLongestSubstring:给定字符串，返回长度最大，且不重复的子串。
 
 algorithm.utlity:工具
 	ArrayToMap:数组转Map
