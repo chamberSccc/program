@@ -13,10 +13,12 @@ public class ReverseNum {
 	public static int reverse(int x){
 		if(x>Math.pow(2.0, 31.0))
 			return 0;
-		if(x<Math.pow(2.0, -31.0))
+		if(x<-Math.pow(2.0, 31.0))
 			return 0;
 		
-		String s = x+"";
+		int abs = Math.abs(x);
+		
+		String s = abs+"";
 		char[] c = s.toCharArray();
 		int result =0;
 		
@@ -24,10 +26,13 @@ public class ReverseNum {
 			//int b = c[i-1];  有疑问  char 7 转换为int是55  char>int
 			result += Integer.parseInt(String.valueOf(c[i-1])) * (int)Math.pow(10, i-1); 
 		}
+		if(x<0)
+			result = -result;
+		
 		System.out.println(result);
 		return result;
 	}
 	public static void main(String[] args){
-		reverse(1234567);
+		reverse(-1234567);
 	}
 }
