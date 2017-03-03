@@ -9,3 +9,4 @@ algorithm.number:数字类算法
 algorithm.utlity:工具
 	ArrayToMap:数组转Map
 	SimpleLinkList:简单链表实现，未拓展。
+	LongestPalindrome:寻找字符串最长的回文序列。
