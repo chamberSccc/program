@@ -33,6 +33,7 @@ public class LengthOfLongestSubstring {
 				}
 				
 			}
+			//找到最长子串，代替
 			if(temp.length() > strBuf.length()){
 				strBuf.delete(0, strBuf.length());
 				strBuf.append(temp);
