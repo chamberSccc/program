@@ -33,7 +33,8 @@ public class LongestPalindrome {
 	}
 	
 	/*
-	 * 前后两个游标搜索数组,第一遍为start游标不动,end游标不匹配则向前进位。匹配则start与end各进一位继续递归
+	 * 前后两个游标搜索数组,第一遍为start游标不动,end游标不匹配则向前进位，end与start重合之后，start向前进位。
+	 * 匹配则start与end各进一位继续递归
 	 */
 	public void getSubPalindrome(int start, int end, String s) {
 
