@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name></display-name>
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+  </welcome-file-list>
+  <!-- 添加对Spring的支持 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- applicationContext.xml路径 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext*.xml</param-value>
+  </context-param>
+  
+   <!-- Spring 刷新Introspector防止内存泄露 -->  
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+  <!-- RequestContextFilter实现ServletRequestListener监听器接口，该监听器监听HTTP请求事件，Web服务器接收的每次请求都会通知该监听器。通过配置RequestContextFilter，Spring容器与Web容器结合的更加密切 -->
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+  
+  <!-- Spring 整合Jersey，并与前端交互必须使用SpringServlet过滤器过滤出请求，否则前端页面不显示或者请求404 -->
+  <filter>
+    <filter-name>jerseySpring</filter-name>
+    <filter-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</filter-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.feature.Redirect</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.config.feature.FilterForwardOn404</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <!-- 过滤静态页面，否则页面不显示或者静态文件无法加载 -->
+    <init-param>
+      <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
+      <param-value>/(images|css|jsp|js|html)/.*</param-value>
+    </init-param>
+    <!-- Jersy返回PoJO对象必须添加否则会报MIME media type application/json was not found.异常 -->
+    <init-param>
+      <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <!-- 指定Jersey资源类包所在路径 -->
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.danbo.business.resource</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>jerseySpring</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+     
+    
+</web-app>
