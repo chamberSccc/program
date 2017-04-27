@@ -26,7 +26,7 @@ def read_image(filename):
                 index += struct.calcsize('>B')
 
         print 'save ' + str(i) + 'image'
-        image.save('test/' + str(i) + '.png')
+        image.save('file/train/' + str(i) + '.png')
 
 
 def read_label(filename, saveFilename):
@@ -59,4 +59,6 @@ def read_label(filename, saveFilename):
 
 if __name__ == '__main__':
     read_image('t10k-images.idx3-ubyte')
-    read_label('train-labels.idx1-ubyte', 'test/label.txt')
+    read_label('t10k-labels.idx1-ubyte', 'file/test_label/label.txt')
+    # read_image('train-images.idx3-ubyte')
+    # read_label('train-labels.idx1-ubyte', 'file/train_label/label.txt')
