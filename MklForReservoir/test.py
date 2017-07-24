@@ -1,73 +1,78 @@
-import pylab as pl
-from matplotlib import *
 import os
+import pylab as pl
 SHOGUN_DATA_DIR=os.getenv('SHOGUN_DATA_DIR', '../../../data')
-# import all shogun classes
 from modshogun import *
 from numpy import *
+from matplotlib import *
+from scipy.io import loadmat, savemat
+from os       import path, sep
 
+mat  = loadmat(sep.join(['..','..','..','data','multiclass', 'usps.mat']))
+Xall = mat['data']
+Yall = array(mat['label'].squeeze(), dtype=double)
+
+# map from 1..10 to 0..9, since shogun
+# requires multiclass labels to be
+# 0, 1, ..., K-1
+Yall = Yall - 1
+
+random.seed(0)
+
+subset = random.permutation(len(Yall))
+
+#get first 1000 examples
+Xtrain = Xall[:, subset[:1000]]
+Ytrain = Yall[subset[:1000]]
+
+Nsplit = 2
+all_ks = range(1, 21)
+
+
+# MKL training and output
+labels = MulticlassLabels(Ytrain)
+feats  = RealFeatures(Xtrain)
+#get test data from 5500 onwards
+Xrem=Xall[:,subset[5500:]]
+Yrem=Yall[subset[5500:]]
+
+#test features not used in training
+feats_rem=RealFeatures(Xrem)
+labels_rem=MulticlassLabels(Yrem)
 
 kernel = CombinedKernel()
-num=30;
-num_components=4
-means=zeros((num_components, 2))
-means[0]=[-1,1]
-means[1]=[2,-1.5]
-means[2]=[-1,-3]
-means[3]=[2,1]
+feats_train = CombinedFeatures()
+feats_test = CombinedFeatures()
 
-covs=array([[1.0,0.0],[0.0,1.0]])
+#append gaussian kernel
+subkernel = GaussianKernel(10,15)
+feats_train.append_feature_obj(feats)
+feats_test.append_feature_obj(feats_rem)
+kernel.append_kernel(subkernel)
 
-gmm=GMM(num_components)
-[gmm.set_nth_mean(means[i], i) for i in range(num_components)]
-[gmm.set_nth_cov(covs,i) for i in range(num_components)]
-gmm.set_coef(array([1.0,0.0,0.0,0.0]))
-xntr=array([gmm.sample() for i in xrange(num)]).T
-xnte=array([gmm.sample() for i in xrange(5000)]).T
-gmm.set_coef(array([0.0,1.0,0.0,0.0]))
-xntr1=array([gmm.sample() for i in xrange(num)]).T
-xnte1=array([gmm.sample() for i in xrange(5000)]).T
-gmm.set_coef(array([0.0,0.0,1.0,0.0]))
-xptr=array([gmm.sample() for i in xrange(num)]).T
-xpte=array([gmm.sample() for i in xrange(5000)]).T
-gmm.set_coef(array([0.0,0.0,0.0,1.0]))
-xptr1=array([gmm.sample() for i in xrange(num)]).T
-xpte1=array([gmm.sample() for i in xrange(5000)]).T
-traindata=concatenate((xntr,xntr1,xptr,xptr1), axis=1)
-trainlab=concatenate((-ones(2*num), ones(2*num)))
+#append PolyKernel
+feats  = RealFeatures(Xtrain)
+subkernel = PolyKernel(10,2)
+feats_train.append_feature_obj(feats)
+feats_test.append_feature_obj(feats_rem)
+kernel.append_kernel(subkernel)
 
-testdata=concatenate((xnte,xnte1,xpte,xpte1), axis=1)
-testlab=concatenate((-ones(10000), ones(10000)))
+kernel.init(feats_train, feats_train)
 
-#convert to shogun features and generate labels for data
-feats_train=RealFeatures(traindata)
-labels=BinaryLabels(trainlab)
+mkl = MKLMulticlass(1.2, kernel, labels)
 
-_ = pl.jet()
-pl.figure(figsize=(18, 5))
-pl.subplot(121)
-# plot train data
-_ = pl.scatter(traindata[0, :], traindata[1, :], c=trainlab, s=100)
-pl.title('Toy data for classification')
-pl.axis('equal')
-colors = ["blue", "blue", "red", "red"]
-# a tool for visualisation
-from matplotlib.patches import Ellipse
+mkl.set_epsilon(1e-2)
+mkl.set_mkl_epsilon(0.001)
+mkl.set_mkl_norm(1)
+
+mkl.train()
+
+#initialize with test features
+kernel.init(feats_train, feats_test)
+
+out =  mkl.apply()
+evaluator = MulticlassAccuracy()
+accuracy = evaluator.evaluate(out, labels_rem)
+print "Accuracy = %2.2f%%" % (100*accuracy)
 
 
-def get_gaussian_ellipse_artist(mean, cov, nstd=1.96, color="red", linewidth=3):
-    vals, vecs = pl.eigh(cov)
-    order = vals.argsort()[::-1]
-    vals, vecs = vals[order], vecs[:, order]
-    theta = numpy.degrees(arctan2(*vecs[:, 0][::-1]))
-    width, height = 2 * nstd * sqrt(vals)
-    e = Ellipse(xy=mean, width=width, height=height, angle=theta, \
-                edgecolor=color, fill=False, linewidth=linewidth)
 
-    return e
-
-
-for i in range(num_components):
-    pl.gca().add_artist(get_gaussian_ellipse_artist(means[i], covs, color=colors[i]))
-
-pl.show()

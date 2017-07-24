@@ -10,7 +10,7 @@ class MyGaussianBlur():
     #sobelX = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])#方向导数暂用sobel算子
     #sobelY = np.array([[1,2,1],[0,0,0],[-1,-2,1]])
 
-    # 初始化
+    # 初始化  ifPure 判断返回特征矩阵 还是返回整合特征矩阵的地震数据列表
     def __init__(self, radius=1, sigma=1.5):
         self.radius = radius
         self.sigma = sigma
@@ -41,12 +41,14 @@ class MyGaussianBlur():
 
                 a = np.multiply(t, template)
                 newData[i, j] = a.sum()
+        #消除边缘为0效应，用原始数据补上
+        newData[:,0] = dataMat[:,0]
+        newData[0,:] = dataMat[0,:]
         return newData
 
     # 2的sigma要比1的sigma大
     def diffOfGauus(self,dataMat1,dataMat2):
         return np.subtract(dataMat2,dataMat1)
-
 
 # r=1 #模版半径，自己自由调整
 # s=3 #sigema数值，自己自由调整
