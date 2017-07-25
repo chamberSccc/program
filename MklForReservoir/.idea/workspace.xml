@@ -28,16 +28,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DataProcess.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DataProcess.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataProcess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="136" column="46" lean-forward="true" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
+            <state relative-caret-position="350">
+              <caret line="167" column="5" lean-forward="true" selection-start-line="167" selection-start-column="5" selection-end-line="167" selection-end-column="5" />
               <folding>
                 <element signature="e#73#84#0" expanded="true" />
                 <element signature="e#567#1681#0" expanded="false" />
                 <element signature="e#1739#1989#0" expanded="false" />
-                <element signature="e#2082#2739#0" expanded="false" />
                 <element signature="e#3108#3182#0" expanded="false" />
                 <element signature="e#3222#3258#0" expanded="false" />
               </folding>
@@ -45,23 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.py">
+      <file leaf-file-name="PreMklProcess.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PreMklProcess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MklRealism.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MklRealism.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+            <state relative-caret-position="-364">
+              <caret line="11" column="54" lean-forward="false" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
               </folding>
@@ -124,10 +111,10 @@
         <option value="$PROJECT_DIR$/test1.py" />
         <option value="$PROJECT_DIR$/data/well/welllog/result.txt" />
         <option value="$PROJECT_DIR$/CalcOperator.py" />
-        <option value="$PROJECT_DIR$/DataProcess.py" />
-        <option value="$PROJECT_DIR$/testFigure.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/MklRealism.py" />
+        <option value="$PROJECT_DIR$/testFigure.py" />
+        <option value="$PROJECT_DIR$/DataProcess.py" />
       </list>
     </option>
   </component>
@@ -165,6 +152,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="MklForReservoir" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MklForReservoir" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MklForReservoir" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="image" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -259,7 +260,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.MklRealism">
+  <component name="RunManager" selected="Python.DataProcess">
     <configuration default="false" name="test1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -345,7 +346,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MklForReservoir" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MklRealism.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PreMklProcess.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -462,10 +463,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.MklRealism" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test.py" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in testFigure.py" />
-        <item index="3" class="java.lang.String" itemvalue="Python.DataProcess" />
+        <item index="0" class="java.lang.String" itemvalue="Python.DataProcess" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in testFigure.py" />
+        <item index="2" class="java.lang.String" itemvalue="Python.MklRealism" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test.py" />
         <item index="4" class="java.lang.String" itemvalue="Python.test1" />
       </list>
     </recent_temporary>
@@ -504,13 +505,13 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_testFigure_py - 2017.07.24 at 18h 44m 32s.xml">
-      <configuration name="Unittests in testFigure.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_testFigure_py - 2017.07.24 at 18h 48m 04s.xml">
       <configuration name="Unittests in testFigure.py" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_testFigure_py - 2017.07.24 at 18h 51m 59s.xml">
+      <configuration name="Unittests in testFigure.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_testFigure_py - 2017.07.25 at 18h 27m 47s.xml">
       <configuration name="Unittests in testFigure.py" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_test_py - 2017.07.24 at 19h 05m 40s.xml">
@@ -600,22 +601,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testFigure.py</url>
-          <line>20</line>
+          <line>24</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DataProcess.py</url>
-          <line>166</line>
-          <option name="timeStamp" value="151" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MklRealism.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="159" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MklRealism.py</url>
-          <line>57</line>
+          <url>file://$PROJECT_DIR$/PreMklProcess.py</url>
+          <line>85</line>
           <option name="timeStamp" value="161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -629,9 +620,19 @@
           <option name="timeStamp" value="168" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MklRealism.py</url>
-          <line>50</line>
+          <url>file://$PROJECT_DIR$/PreMklProcess.py</url>
+          <line>78</line>
           <option name="timeStamp" value="170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DataProcess.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DataProcess.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="177" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -644,12 +645,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="171" />
+      <option name="time" value="178" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/image/New_Dog3_5_WechatIMG3.jpeg" />
     <entry file="file://$PROJECT_DIR$/image/New_Gau5_100_WechatIMG3.jpeg" />
     <entry file="file://$PROJECT_DIR$/image/New_Gau3_100_WechatIMG3.jpeg" />
     <entry file="file://$PROJECT_DIR$/image/New_Gau3_200_WechatIMG3.jpeg" />
@@ -846,26 +846,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testFigure.py">
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/160944109/_modshogun/Kernel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="159">
+          <caret line="171" column="8" lean-forward="false" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="136" column="46" lean-forward="true" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
-          <folding>
-            <element signature="e#73#84#0" expanded="true" />
-            <element signature="e#567#1681#0" expanded="false" />
-            <element signature="e#1739#1989#0" expanded="false" />
-            <element signature="e#2082#2739#0" expanded="false" />
-            <element signature="e#3108#3182#0" expanded="false" />
-            <element signature="e#3222#3258#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -879,20 +864,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/160944109/_modshogun/Kernel.py">
+    <entry file="file://$PROJECT_DIR$/testFigure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="171" column="8" lean-forward="false" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
+        <state relative-caret-position="300">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MklRealism.py">
+    <entry file="file://$PROJECT_DIR$/image/MklRealism">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PreMklProcess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-364">
+          <caret line="11" column="54" lean-forward="false" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
           <folding>
             <element signature="e#24#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataProcess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="167" column="5" lean-forward="true" selection-start-line="167" selection-start-column="5" selection-end-line="167" selection-end-column="5" />
+          <folding>
+            <element signature="e#73#84#0" expanded="true" />
+            <element signature="e#567#1681#0" expanded="false" />
+            <element signature="e#1739#1989#0" expanded="false" />
+            <element signature="e#3108#3182#0" expanded="false" />
+            <element signature="e#3222#3258#0" expanded="false" />
           </folding>
         </state>
       </provider>
