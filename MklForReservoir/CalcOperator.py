@@ -42,8 +42,9 @@ class MyGaussianBlur():
                 a = np.multiply(t, template)
                 newData[i, j] = a.sum()
         #消除边缘为0效应，用原始数据补上
-        newData[:,0] = dataMat[:,0]
-        newData[0,:] = dataMat[0,:]
+        temp = newData.copy()
+        newData[:,0] = temp[:,1]
+        newData[0,:] = temp[1,:]
         return newData
 
     # 2的sigma要比1的sigma大
@@ -53,5 +54,9 @@ class MyGaussianBlur():
 # r=1 #模版半径，自己自由调整
 # s=3 #sigema数值，自己自由调整
 # GBlur=MyGaussianBlur(radius=r, sigma=4.0)#声明高斯模糊类
+# GBlur1=MyGaussianBlur(radius=r, sigma=6.0)#声明高斯模糊类
+# GBlur2=MyGaussianBlur(radius=r, sigma=8.0)#声明高斯模糊类
 # temp=GBlur.GaussKernelMat()#得到滤波模版
+# temp1 =GBlur1.GaussKernelMat()
+# temp2 =GBlur2.GaussKernelMat()
 # print temp

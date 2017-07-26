@@ -7,7 +7,7 @@ import modshogun as shogun
 kernelWidthList = [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,
                    1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,]
 #获取核函数的组合实例
-def getCombinKernel(kernelWidth):
+def getCombinKernel(kernelWidth,trainDataList):
     kernel_Gau_R1 = shogun.GaussianKernel(kernelWidth[0])
     kernel_Gau_R2 = shogun.GaussianKernel(kernelWidth[1])
     kernel_Gau_R4 = shogun.GaussianKernel(kernelWidth[2])
@@ -48,7 +48,8 @@ def getCombinKernel(kernelWidth):
     combined_kernel.append_kernel(kernel_X_Y)
 
     return combined_kernel
-
+def getShogunFeature(trainDataList):
+    return
 def reshapeData():
     features_train = shogun.RealFeatures(train_data)
     features_test  = shogun.RealFeatures(test_data)
