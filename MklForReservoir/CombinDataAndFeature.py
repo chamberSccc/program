@@ -84,7 +84,7 @@ def detailFeature(wellTrain,seistrain):
                        Well_Dog_R2_R1_Feature, Well_Dog_R4_R2_Feature, Well_Dog_R8_R6_Feature]
 
     Seis_X_Y_Data_temp = np.array(seistrain[:, 0:2])  # 地震数据(测试用)的16种特征
-    Seis_X_Y_Data = np.transpose(Seis_X_Y_Data_temp).tolist()
+    Seis_X_Y_Data = np.transpose(Seis_X_Y_Data_temp)
     Seis_Gaus_R1_Feature = np.array(seistrain[:, 4])
     Seis_Gaus_R2_Feature = np.array(seistrain[:, 5])
     Seis_Gaus_R4_Feature = np.array(seistrain[:, 6])

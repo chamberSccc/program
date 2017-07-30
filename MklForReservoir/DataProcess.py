@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# from matplotlib import *
-# from pylab import *
 import math
 import numpy as np
 import copy
@@ -39,7 +37,8 @@ def seisData2Mat(seisDir):
             row += 1;
 
         temp = line.replace('\r','').replace('\n','').rstrip().split(' ')
-        floatTemp = [round(float(x),2) for x in temp]
+        temp = filter(notEmpty, temp)
+        floatTemp = [float(x) for x in temp]
 
         tempDataValue.append(floatTemp[3])
         dataCoord.append(floatTemp[:2])
@@ -72,8 +71,7 @@ def getWellTrainData(seisMatNp,wellData):
         templist = seisMatNp[compareIndex]
 
         if len(compareIndex[0]) != 0:
-            print templist
-            i.extend(templist[0,4:])
+            i.extend(templist[0,:])
         else:
             pass
         # f.write(''.join([str(v)+' ' for v in temp])+'\n')
@@ -111,16 +109,3 @@ def delZeroFromSeisTrain(seisTrainData):
 def notEmpty(x):
     return x != '';
 
-# def testPil(seisdata,seisdataMat):
-#     seisMatNp = np.array(seisdata)
-#     x1 = seisMatNp[:,0]
-#     x2 = seisMatNp[:,1]
-#     z = seisdataMat
-#     x, y = meshgrid(x1, x2)
-#     figure(figsize=(10, 5))
-#     title("Classification using MKL")
-#     c=pcolor(x, y, z)
-#     _=colorbar(c)
-#     return
-
-#先得到测井数据列表
