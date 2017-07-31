@@ -2,6 +2,7 @@
 import math
 import numpy as np
 import copy
+import DataVisualize as dv
 
 seisDataDir = 'data/seismic/seismic'
 seisTestDir = 'data/seismic/testdata'
@@ -26,7 +27,7 @@ def seisData2Mat(seisDir):
     Returns
     -------
     data :  list_like         seis data list
-    dataValue : array_like    seis attribute matrix(wave impedance)
+    dataValue : list_like     seis attribute list
     dataCoord : list_like     seismic data's coordinate list
     """
     data = []
@@ -48,26 +49,30 @@ def seisData2Mat(seisDir):
             continue
         # first end the invalid data loop
         if line[0:6] != '-99.00' and index == 1:
-            dataValue.append(tempDataValue)
-            tempDataValue = []
             index = 0;
             row += 1;
         temp = line.replace('\r','').replace('\n','').rstrip().split(' ')
         temp = filter(notEmpty, temp)
         floatTemp = [float(x) for x in temp]
 
-        tempDataValue.append(floatTemp[3])
         dataCoord.append(floatTemp[:2])
-        # floatTemp.pop(2)
+        dataValue.append(floatTemp[3])
         data.append(floatTemp)
-    #save last row data
-    dataValue.append(tempDataValue)
-
-    map(extend0Toarray, dataValue)
     # dataDesc = dataValue[::-1]
-    npDataValue= np.array(dataValue)
-    return data,npDataValue, dataCoord
+    return data,dataValue, dataCoord
+def attrToMat(coordList,attList):
+    """
+    Parameter
+    ---------
+    coordList: list_like coordinate list data
+    attList: list_like attribute list data
 
+    Returns
+    -------
+    attMat: attribute matrix according to the coordinate data range
+    """
+    xList,yList = dv.getXYrange(coordList)
+    return
 #get well data list
 def getWellData(wellDir):
     """
@@ -139,18 +144,6 @@ def getSeisTrainData(seisData, featureMatList):
             test_seis_data[j].append(temp)
     test_seis_data = np.array(test_seis_data)
     return test_seis_data
-
-
-def extend0Toarray(x):
-    """
-    extend 0 for the irregular matrix
-    ---------------------------------
-    transform |1|2| | |  to|1|2|0|0|
-              |3|4| | |    |3|4|0|0|
-    the seismicMaxLenth is 4
-    """
-    temp = [0 for i in range(0, seismicMaxLength - len(x))]
-    x.extend(temp)
 
 def delZeroData(data, index):
     """

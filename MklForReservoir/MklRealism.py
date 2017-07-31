@@ -4,11 +4,12 @@ import PreMklProcess as pMkl
 import numpy as np
 import DataVisualize as dv
 import DataProcess as dp
+import utility as util
 
 wellLogList = dp.getWellData(dp.wellLogDataDir)
-seisDataList, waveMat, seisCoord  = dp.seisData2Mat(dp.seisDataDir)
-
-featureList =  comb.generateFeatureMat(waveMat)
+seisDataList, waveList, seisCoord  = dp.seisData2Mat(dp.seisDataDir)
+waveMat= util.dataTransMat(np.array(seisCoord),np.array(waveList))
+featureList =  comb.generateFeatureMat(np.array(waveMat))
 wellTrainData ,seisTrainData = comb.combinDataAndFeature(seisDataList,wellLogList,featureList)
 wellFeatureDataList,seisFeatureDataList = comb.detailFeature(wellTrainData ,seisTrainData)
 
@@ -33,7 +34,6 @@ combined_kernel.init(combined_Train_sgFeature, combined_Test_sgFeature)
 labels_predict = mkl.apply_regression()
 predit_porosity = labels_predict.get_labels()
 # dv.visualize(seisTrainData, predit_porosity)
-# dv.visualize(np.array(comb.seisDataList), np.array(comb.seisDataList)[:,4])
 dv.visualize(seisTrainData,seisTrainData[:,4])
 aaa =  1
 
