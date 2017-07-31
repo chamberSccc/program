@@ -52,7 +52,7 @@ def seisData2Mat(seisDir):
             tempDataValue = []
             index = 0;
             row += 1;
-
+        aaaaa= 1
         temp = line.replace('\r','').replace('\n','').rstrip().split(' ')
         temp = filter(notEmpty, temp)
         floatTemp = [float(x) for x in temp]
