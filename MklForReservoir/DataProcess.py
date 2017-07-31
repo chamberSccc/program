@@ -7,11 +7,28 @@ seisDataDir = 'data/seismic/seismic'
 seisTestDir = 'data/seismic/testdata'
 wellLogDataDir = 'data/well/welllog/data.txt' #x y z shen kong bao bozukang x y z
 wellTopDataDir = 'data/well/welltop.dat'
-seismicMaxLength = 100  # 二维数组每行长度不等时计算出最长的那行,数据预处理的时候得到的值，当做全局变量处理，不必在程序中展现
+
+#the longest row in irregular 2D array,which in order to entend 0 to each row
+#transform |1|2| | |  to|1|2|0|0|
+#          |3|4| | |    |3|4|0|0|
+#the seismicMaxLenth is 4
+seismicMaxLength = 100
 train_well_data = []
 
-#返回完整地震数据矩阵(data),网格排列波阻抗矩阵(dataValue)，坐标矩阵(dataCoord)
+
+#transform seismic data to attribute matrix
 def seisData2Mat(seisDir):
+    """
+    Parameter
+    ---------
+    seisDir: seismic data path
+
+    Returns
+    -------
+    data :  list_like         seis data list
+    dataValue : array_like    seis attribute matrix(wave impedance)
+    dataCoord : list_like     seismic data's coordinate list
+    """
     data = []
     dataCoord = []
     dataValue = []
@@ -22,14 +39,14 @@ def seisData2Mat(seisDir):
         # filter the data title
         if len(line) < 40 and line[0:6] != '-99.00':
             continue
-        # 第一次碰到非法数据
+        # first meet the invalid data
         if line[0:6] == '-99.00' and index == 0:
             index += 1
             continue
-        # 正在非法数据循环中
+        # looping in the invalid data
         if line[0:6] == '-99.00' and index != 0:
             continue
-        # 第一次结束非法数据循环
+        # first end the invalid data loop
         if line[0:6] != '-99.00' and index == 1:
             dataValue.append(tempDataValue)
             tempDataValue = []
@@ -44,17 +61,26 @@ def seisData2Mat(seisDir):
         dataCoord.append(floatTemp[:2])
         # floatTemp.pop(2)
         data.append(floatTemp)
-    #存入最后一行数据
+    #save last row data
     dataValue.append(tempDataValue)
 
-    # 数0组中长度不等的地方补0
     map(extend0Toarray, dataValue)
     # dataDesc = dataValue[::-1]
     npDataValue= np.array(dataValue)
     return data,npDataValue, dataCoord
 
-#x y z per por sat 解析测井数据
+#get well data list
 def getWellData(wellDir):
+    """
+    Parameter
+    ---------
+    wellDir: well data path
+
+    Returns
+    -------
+    wellList :  list_like     well data list
+                dataformat is x y z permeability porosity stauration
+    """
     wellList = []
     for line in open(wellLogDataDir):
         temp = line.replace('\r', '').replace('\n', '').replace('\t', ' ').rstrip().split(' ')
@@ -62,9 +88,19 @@ def getWellData(wellDir):
         wellList.append(temp)
     return wellList
 
-#组合测井数据与15种特征 x y z per por sat 15features
+#combine well data and 15 feature
 def getWellTrainData(seisMatNp,wellData):
-    # f = open('data/well/welllog/result.txt', 'w')
+    """
+    Parameter
+    ---------
+    seisMatNp: array_like   seismic attribute matrix(wave impedance)
+    wellData:  list_like    well data list
+
+    Returns
+    -------
+    npWellData :  array_like   seis data list combined with feature
+                      dataformat is x y z permeability porosity saturation 15feature
+    """
     for i in wellData:
         temp = np.array(i)
         compareIndex = np.where(abs(float(temp[1]) - seisMatNp[:, 0]) <= 50.0 * (abs(float(temp[2]) - seisMatNp[:, 1]) <=50.0))
@@ -74,38 +110,64 @@ def getWellTrainData(seisMatNp,wellData):
             i.extend(templist[0,:])
         else:
             pass
-        # f.write(''.join([str(v)+' ' for v in temp])+'\n')
-    # f.close()
     npWellData = np.array(wellData)
     temp1 = npWellData[:,7]
     zeroIndex = np.where(temp1=='0.0')
+
     #特征计算过程中会出现0,暂且认为是脏数据
     for x in zeroIndex:
         npWellData = np.delete(npWellData,x,axis=0)
     return npWellData
 
-#组合地震数据与15种特征
+#combine seismic data and features
 def getSeisTrainData(seisData, featureMatList):
-    train_seis_data = copy.deepcopy(seisData)
+    """
+    Parameter
+    ---------
+    seisData: list_like  seismic data list
+    featureMatList:list_like   list include all feature's object(each feature is a matrix)
+
+    Returns
+    -------
+    test_seis_data :  array_like    test seismic data combined with features
+                dataformat is x y z permeability porosity stauration
+    """
+    test_seis_data = copy.deepcopy(seisData)
     for i in range(0,15):
         tempList = featureMatList[i]
         for j, data in enumerate(seisData):
             temp = tempList[int(j / 100), j % 100]
-            train_seis_data[j].append(temp)
+            test_seis_data[j].append(temp)
+    test_seis_data = np.array(test_seis_data)
+    return test_seis_data
 
-    return np.array(train_seis_data)
-#组合矩阵中每行数据不足的地方补0,每行最多为seismicMaxlength
+
 def extend0Toarray(x):
+    """
+    extend 0 for the irregular matrix
+    ---------------------------------
+    transform |1|2| | |  to|1|2|0|0|
+              |3|4| | |    |3|4|0|0|
+    the seismicMaxLenth is 4
+    """
     temp = [0 for i in range(0, seismicMaxLength - len(x))]
     x.extend(temp)
-#删除地震训练数据中特征为0的行
-def delZeroFromSeisTrain(seisTrainData):
-    temp1 = seisTrainData[:,4]
+
+def delZeroData(data, index):
+    """
+    delete the nonsense value from data(always 0 in feature data)
+    Parameter
+    ---------
+    data: array_like   data
+    index: int    column which first appear 0
+    """
+    temp1 = data[:, 4]
     zeroIndex = np.where(temp1 == 0.0)
     for x in zeroIndex:
-        seisTrainData = np.delete(seisTrainData,x,axis=0)
-    return seisTrainData
-#消除数组中'',配合filter使用
+        data = np.delete(data, x, axis=0)
+    return data
+
+#delete '' in a list,associate with the filter function
 def notEmpty(x):
     return x != '';
 

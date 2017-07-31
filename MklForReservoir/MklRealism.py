@@ -29,6 +29,7 @@ alpha = mkl.get_alphas()
 combined_kernel.init(combined_Train_sgFeature, combined_Test_sgFeature)
 labels_predict = mkl.apply_regression()
 predit_porosity = labels_predict.get_labels()
-dv.visualize(seisTrainData, predit_porosity)
+# dv.visualize(seisTrainData, predit_porosity)
+dv.visualize(np.array(comb.seisDataList), np.array(comb.seisDataList)[:,3])
 aaa =  1
 

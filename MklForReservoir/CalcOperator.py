@@ -6,22 +6,28 @@ import numpy as np
 
 
 class MyGaussianBlur():
-    #gradOpeator = np.array([[0,1,0],[1,-4,1],[0,1,0]])#laplace 算子
-    #sobelX = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])#方向导数暂用sobel算子
-    #sobelY = np.array([[1,2,1],[0,0,0],[-1,-2,1]])
-
-    # 初始化  ifPure 判断返回特征矩阵 还是返回整合特征矩阵的地震数据列表
+    #init
     def __init__(self, radius=1, sigma=1.5):
         self.radius = radius
         self.sigma = sigma
 
     def CalcGauss(self, x, y):
+        """
+        Calcaulate  Gaussion distribution number at each matrix index
+        Parameter
+        ---------
+        x: row index
+        y: column index
+        """
         res1 = 1 / (2 * math.pi * self.sigma * self.sigma)
         res2 = math.exp(-(x * x + y * y) / (2 * self.sigma * self.sigma))
         return res1 * res2
-        # 得到滤波模版
+
 
     def GaussKernelMat(self):
+        """
+        Get the Gaussion blur template
+        """
         sideLength = self.radius * 2 + 1
         result = np.zeros((sideLength, sideLength))
         for i in range(sideLength):
@@ -31,6 +37,17 @@ class MyGaussianBlur():
         return result / all
 
     def Convolute(self, dataMat, template):
+        """
+        Data matrix convolute with the data matrix
+        Parameter
+        ---------
+        dataMat:  array_like convoluted array data
+        template: array_like convolute template
+
+        Returns
+        -------
+        newData: result
+        """
         arr = np.array(dataMat)
         height = arr.shape[0]
         width = arr.shape[1]
@@ -47,16 +64,7 @@ class MyGaussianBlur():
         newData[0,:] = temp[1,:]
         return newData
 
-    # 2的sigma要比1的sigma大
+    # Difference of Gaussion
+    # Data format: dataMat2's sigma > dataMat1's sigma
     def diffOfGauus(self,dataMat1,dataMat2):
         return np.subtract(dataMat2,dataMat1)
-
-# r=1 #模版半径，自己自由调整
-# s=3 #sigema数值，自己自由调整
-# GBlur=MyGaussianBlur(radius=r, sigma=4.0)#声明高斯模糊类
-# GBlur1=MyGaussianBlur(radius=r, sigma=6.0)#声明高斯模糊类
-# GBlur2=MyGaussianBlur(radius=r, sigma=8.0)#声明高斯模糊类
-# temp=GBlur.GaussKernelMat()#得到滤波模版
-# temp1 =GBlur1.GaussKernelMat()
-# temp2 =GBlur2.GaussKernelMat()
-# print temp

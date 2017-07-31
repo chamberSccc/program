@@ -32,16 +32,16 @@ def generateFeatureMat():
     Gaus_R4 = GBlur_R4.Convolute(waveMat, R4_Template)
     Gaus_R6 = GBlur_R6.Convolute(waveMat, R6_Template)
     Gaus_R8 = GBlur_R8.Convolute(waveMat, R8_Template)
-    Grad_R1 = GBlur_R1.Convolute(Gaus_R1, LapOpeator)  # 梯度
+    Grad_R1 = GBlur_R1.Convolute(Gaus_R1, LapOpeator)  # Gradient Norm
     Grad_R2 = GBlur_R2.Convolute(Gaus_R2, LapOpeator)
     Grad_R4 = GBlur_R4.Convolute(Gaus_R4, LapOpeator)
-    Dir_X_R1 = GBlur_R1.Convolute(Gaus_R1, sobelX)  # 方向倒数
+    Dir_X_R1 = GBlur_R1.Convolute(Gaus_R1, sobelX)  # Directional derivatice
     Dir_X_R2 = GBlur_R2.Convolute(Gaus_R2, sobelX)
     Dir_X_R4 = GBlur_R4.Convolute(Gaus_R4, sobelX)
     Dir_Y_R1 = GBlur_R1.Convolute(Gaus_R1, sobelY)
     Dir_Y_R2 = GBlur_R2.Convolute(Gaus_R2, sobelY)
     Dir_Y_R4 = GBlur_R4.Convolute(Gaus_R4, sobelY)
-    Dog_R2_R1 = GBlur_R1.diffOfGauus(Gaus_R1, Gaus_R2)  # 高斯差分
+    Dog_R2_R1 = GBlur_R1.diffOfGauus(Gaus_R1, Gaus_R2)  # DOG
     Dog_R4_R2 = GBlur_R1.diffOfGauus(Gaus_R2, Gaus_R4)
     Dog_R8_R6 = GBlur_R1.diffOfGauus(Gaus_R6, Gaus_R8)
     featureList = [Gaus_R1, Gaus_R2, Gaus_R4,Grad_R1, Grad_R2, Grad_R4,
@@ -52,7 +52,8 @@ def generateFeatureMat():
 # 将测井数据与地震数据转换为训练数据格式，方便加入15种特征
 def combinDataAndFeature(seisDataList, wellLogList, featureMatList):
     train_seis_data = getSeisTrainData(seisDataList, featureMatList)
-    seisTrainData = delZeroFromSeisTrain(train_seis_data)
+    #when the 4th column appear 0,we think corresponding row is nonsense,so delete it
+    seisTrainData = delZeroData(train_seis_data, 4)
     wellTrainData = getWellTrainData(train_seis_data, wellLogList)
     wellTrainData = np.delete(wellTrainData, 0, axis=1)
     wellTrainData = np.array(wellTrainData.tolist(), dtype=float)
