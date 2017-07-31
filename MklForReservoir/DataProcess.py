@@ -5,7 +5,7 @@ import copy
 
 seisDataDir = 'data/seismic/seismic'
 seisTestDir = 'data/seismic/testdata'
-wellLogDataDir = 'data/well/welllog/data.txt' #x y z shen kong bao bozukang x y z
+wellLogDataDir = 'data/well/welllog/data.txt' #data format:x y z per por sat wave x y z
 wellTopDataDir = 'data/well/welltop.dat'
 
 #the longest row in irregular 2D array,which in order to entend 0 to each row
@@ -52,7 +52,6 @@ def seisData2Mat(seisDir):
             tempDataValue = []
             index = 0;
             row += 1;
-
         temp = line.replace('\r','').replace('\n','').rstrip().split(' ')
         temp = filter(notEmpty, temp)
         floatTemp = [float(x) for x in temp]
@@ -115,8 +114,8 @@ def getWellTrainData(seisMatNp,wellData):
     zeroIndex = np.where(temp1=='0.0')
 
     #特征计算过程中会出现0,暂且认为是脏数据
-    for x in zeroIndex:
-        npWellData = np.delete(npWellData,x,axis=0)
+    # for x in zeroIndex:
+    #     npWellData = np.delete(npWellData,x,axis=0)
     return npWellData
 
 #combine seismic data and features

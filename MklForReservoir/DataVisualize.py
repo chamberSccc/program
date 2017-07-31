@@ -13,8 +13,20 @@ def visualize(testData, predictedData):
     figure = dict(data=[trace],layout=layout)
     plotly.offline.plot(figure)
 
-#（二维）将预测数据与坐标鼠标转为 plotly所需要的网格数据 x一维 y一维 z二维
 def dataTransMat(testData, zValue):
+    """
+    trasfrom test data and z value to a spectific format,which plotly needs
+    Parameter
+    --------
+    testData:array_like     test data
+    zValue  :array_like     attribute data
+
+    Returns
+    -------
+    xList: transform x value to a range(no-repeat) between xMin and xMax.
+    yList: transform y value to a range(no-repeat) between yMin and yMax.
+    gridList: go.Heatmap() functions param  z
+    """
     xData = testData[:, 0]
     yData = testData[:, 1]
     if np.size(xData) != np.size(yData):
@@ -33,8 +45,12 @@ def dataTransMat(testData, zValue):
             if temp.size == 3:
                 gridList[yIndex, xIndex] = zData[index[0]]
     return xList,yList,gridList.tolist()
-#得到x y坐标不重复排列
+
 def getXYrange(testData):
+    """
+     transform x value to a range between(no-repeat) xMin and xMax.
+     transform y value to a range between(no-repeat) yMin and yMax.
+    """
     xData = testData[:, 0]
     yData = testData[:, 1]
     xList,yList = [],[]

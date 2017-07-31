@@ -6,16 +6,13 @@ r=1 #模版半径，自己自由调整
 LapOpeator = np.array([[0,1,0],[1,-4,1],[0,1,0]])#laplace 算子
 sobelX = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])#方向导数暂用sobel算子
 sobelY = np.array([[1,2,1],[0,0,0],[-1,-2,1]])
-#解析地震数据,测井数据
-wellLogList = getWellData(wellLogDataDir)
-seisDataList, waveMat, seisCoord  = seisData2Mat(seisDataDir)
 
 #构造17种特征数据    返回特征矩阵列表
 #1：DOG R2和R1  R4和R2  R8和R6
 #2：Grad R1 R2 R4
 #3：Dir Y1 Y2 Y4 X1 X2 X4
 #4 Smooth R1 R2 R4
-def generateFeatureMat():
+def generateFeatureMat(attribute):
     GBlur_R1 = MyGaussianBlur(radius=r, sigma=1.0)  # 声明高斯模糊类
     GBlur_R2 = MyGaussianBlur(radius=r, sigma=2.0)
     GBlur_R4 = MyGaussianBlur(radius=r, sigma=4.0)
@@ -27,11 +24,11 @@ def generateFeatureMat():
     R6_Template = GBlur_R6.GaussKernelMat()
     R8_Template = GBlur_R8.GaussKernelMat()
 
-    Gaus_R1 = GBlur_R1.Convolute(waveMat, R1_Template)  # 15种特征,高斯模糊
-    Gaus_R2 = GBlur_R2.Convolute(waveMat, R2_Template)
-    Gaus_R4 = GBlur_R4.Convolute(waveMat, R4_Template)
-    Gaus_R6 = GBlur_R6.Convolute(waveMat, R6_Template)
-    Gaus_R8 = GBlur_R8.Convolute(waveMat, R8_Template)
+    Gaus_R1 = GBlur_R1.Convolute(attribute, R1_Template)  # 15种特征,高斯模糊
+    Gaus_R2 = GBlur_R2.Convolute(attribute, R2_Template)
+    Gaus_R4 = GBlur_R4.Convolute(attribute, R4_Template)
+    Gaus_R6 = GBlur_R6.Convolute(attribute, R6_Template)
+    Gaus_R8 = GBlur_R8.Convolute(attribute, R8_Template)
     Grad_R1 = GBlur_R1.Convolute(Gaus_R1, LapOpeator)  # Gradient Norm
     Grad_R2 = GBlur_R2.Convolute(Gaus_R2, LapOpeator)
     Grad_R4 = GBlur_R4.Convolute(Gaus_R4, LapOpeator)
@@ -51,10 +48,10 @@ def generateFeatureMat():
 
 # 将测井数据与地震数据转换为训练数据格式，方便加入15种特征
 def combinDataAndFeature(seisDataList, wellLogList, featureMatList):
-    train_seis_data = getSeisTrainData(seisDataList, featureMatList)
+    seisTrainData = getSeisTrainData(seisDataList, featureMatList)
     #when the 4th column appear 0,we think corresponding row is nonsense,so delete it
-    seisTrainData = delZeroData(train_seis_data, 4)
-    wellTrainData = getWellTrainData(train_seis_data, wellLogList)
+    # seisTrainData = delZeroData(train_seis_data, 4)
+    wellTrainData = getWellTrainData(seisTrainData, wellLogList)
     wellTrainData = np.delete(wellTrainData, 0, axis=1)
     wellTrainData = np.array(wellTrainData.tolist(), dtype=float)
     return wellTrainData,seisTrainData

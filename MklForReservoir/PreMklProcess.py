@@ -5,8 +5,15 @@ SHOGUN_DATA_DIR=os.getenv('SHOGUN_DATA_DIR', '../../../data')
 import modshogun as shogun
 
 
-#获取核函数的组合实例 combin_kernel
 def getCombinKernel(kernelWidth, TrainDataList):
+    """
+    Get combined kernel function instance
+    Parameter
+    ---------
+    kernelWidth: list_like kernel width param list for each kernel
+    TrainDataList: feature data list
+                   data format:[feature1,feature2,feature3......]
+    """
     sgTrainDataList = []
     for x in TrainDataList:
         dimen = x.shape
@@ -40,7 +47,8 @@ def getCombinKernel(kernelWidth, TrainDataList):
     for kernel in kernel_train_list:
         combined_kernel.append_kernel(kernel)
     return combined_kernel
-#得到shogun复合特征 combin_feature
+
+#get shogun's combined feature
 def getShogunFeature(trainDataList):
     combin_feature = shogun.CombinedFeatures()
     for x in trainDataList:
@@ -52,7 +60,7 @@ def getShogunFeature(trainDataList):
         combin_feature.append_feature_obj(shogun.RealFeatures(temp))
     return combin_feature
 
-#训练MKL
+#get mkl instance
 def getMkl(kernel,label):
     svm_solver = shogun.SVRLight()
     mkl = shogun.MKLRegression(svm_solver)

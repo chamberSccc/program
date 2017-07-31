@@ -16,16 +16,3 @@ c = b[index]
 print index == ()
 print len(index)
 print index[0] == np.array([])
-
-# xMin,xMax = np.min(xData),np.max(xData)
-    # yMin,yMax = np.min(yData),np.max(yData)
-    # xLine = np.linspace(xMin,xMax,int(((xMax-xMin)/100)+1))
-    # yLine = np.linspace(yMin, yMax, int(((yMax - yMin) / 100)+1))
-    # x, y = pyl.meshgrid(xData, yData)
-    # a = testData[:,0]
-    # b = testData[:,1]
-    # z = predictedData.reshape((a.size,b.size))
-    # pyl.pcolor(x, y, z)
-    # # x和y是网格,z是(x,y)坐标处的颜色值
-    # pyl.colorbar()  # 使用颜色条
-    # pyl.show()
