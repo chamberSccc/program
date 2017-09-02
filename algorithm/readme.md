@@ -12,6 +12,10 @@
 	ReverseNum:给定32位int,返回反转的数字。
 	FindMedianSortedArray:两个有序数组，返回中值。
 	OneOrTwoFloor:十层台阶问题
+	
+## algorithm.company:面试题
+	
+	countBear:拼多多校招题,熊吃糖问题
 
 ## algorithm.utlity:工具
 	
