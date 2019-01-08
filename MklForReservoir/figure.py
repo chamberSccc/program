@@ -9,10 +9,11 @@ import numpy as np
 # data = [trace]
 # plotly.offline.plot(data)
 
-a = [[1,2,3],[3,4,5]]
+a = [[1,2,3],[3,4,5],[2,3,4]]
 b= np.array(a)
-index = np.where((b[:,0] == 4) * (b[:,1] == 4))
-c = b[index]
-print index == ()
-print len(index)
-print index[0] == np.array([])
+index = np.where(b==2)
+b[:,-1:] = 0
+
+b = np.delete(b,index)
+
+print b

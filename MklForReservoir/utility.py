@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-#（二维）将预测数据与坐标鼠标转为 plotly所需要的网格数据 x一维 y一维 z二维
+#（二维）将预测数据与坐标鼠标转为 plotly所需要的网格数据 x一维 y一维 z对应值
 def dataTransMat(coordData, zValue):
     xData = coordData[:, 0]
     yData = coordData[:, 1]
@@ -27,8 +27,8 @@ def getXYrange(testData):
     xList,yList = [],[]
     # 根据xy最小最大坐标得到网格范围
     xyList = np.array(map(roundSix, testData[:,0:2]))
-    xMin, xMax = np.min(xData), np.max(xData)
-    yMin, yMax = np.min(yData), np.max(yData)
+    xMin, xMax = np.min(xData)-1, np.max(xData)+1
+    yMin, yMax = np.min(yData)-1, np.max(yData)+1
     for i in xyList:
         if i[0] >= xMin and i[0] <= xMax and (i[0] in xList) == False:
             xList.append(i[0])

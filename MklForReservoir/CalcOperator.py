@@ -58,10 +58,6 @@ class MyGaussianBlur():
 
                 a = np.multiply(t, template)
                 newData[i, j] = a.sum()
-        #消除边缘为0效应，用原始数据补上
-        temp = newData.copy()
-        newData[:,0] = temp[:,1]
-        newData[0,:] = temp[1,:]
         return newData
 
     # Difference of Gaussion

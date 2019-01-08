@@ -13,20 +13,27 @@ sobelY = np.array([[1,2,1],[0,0,0],[-1,-2,1]])
 #3：Dir Y1 Y2 Y4 X1 X2 X4
 #4 Smooth R1 R2 R4
 def generateFeatureMat(attribute):
-    GBlur_R1 = MyGaussianBlur(radius=1, sigma=1.0)  # 声明高斯模糊类
-    GBlur_R2 = MyGaussianBlur(radius=2, sigma=1.0)
-    GBlur_R4 = MyGaussianBlur(radius=3, sigma=1.0)
-    GBlur_R6 = MyGaussianBlur(radius=4, sigma=1.0)
-    GBlur_R8 = MyGaussianBlur(radius=5, sigma=1.0)
+    # GBlur_R1 = MyGaussianBlur(radius=1, sigma=1.0)  # 声明高斯模糊类
+    # GBlur_R2 = MyGaussianBlur(radius=2, sigma=1.0)
+    # GBlur_R4 = MyGaussianBlur(radius=4, sigma=1.0)
+    # GBlur_R6 = MyGaussianBlur(radius=6, sigma=1.0)
+    # GBlur_R8 = MyGaussianBlur(radius=8, sigma=1.0)
+    GBlur_R1 = MyGaussianBlur(radius=r, sigma=1.0)  # 声明高斯模糊类
+    GBlur_R2 = MyGaussianBlur(radius=r, sigma=2.0)
+    GBlur_R4 = MyGaussianBlur(radius=r, sigma=4.0)
+    GBlur_R6 = MyGaussianBlur(radius=r, sigma=6.0)
+    GBlur_R8 = MyGaussianBlur(radius=r, sigma=8.0)
     R1_Template = GBlur_R1.GaussKernelMat()  # 得到滤波模版
     R2_Template = GBlur_R2.GaussKernelMat()
     R4_Template = GBlur_R4.GaussKernelMat()
     R6_Template = GBlur_R6.GaussKernelMat()
+    R8_Template = GBlur_R8.GaussKernelMat()
 
     Gaus_R1 = GBlur_R1.Convolute(attribute, R1_Template)  # 15种特征,高斯模糊
     Gaus_R2 = GBlur_R2.Convolute(attribute, R2_Template)
     Gaus_R4 = GBlur_R4.Convolute(attribute, R4_Template)
     Gaus_R6 = GBlur_R6.Convolute(attribute, R6_Template)
+    Gaus_R8 = GBlur_R8.Convolute(attribute, R8_Template)
     Grad_R1 = GBlur_R1.Convolute(Gaus_R1, LapOpeator)  # Gradient Norm
     Grad_R2 = GBlur_R2.Convolute(Gaus_R2, LapOpeator)
     Grad_R4 = GBlur_R4.Convolute(Gaus_R4, LapOpeator)
@@ -38,7 +45,7 @@ def generateFeatureMat(attribute):
     Dir_Y_R4 = GBlur_R4.Convolute(Gaus_R4, sobelY)
     Dog_R2_R1 = GBlur_R1.diffOfGauus(Gaus_R1, Gaus_R2)  # DOG
     Dog_R4_R2 = GBlur_R1.diffOfGauus(Gaus_R2, Gaus_R4)
-    Dog_R6_R4 = GBlur_R1.diffOfGauus(Gaus_R4, Gaus_R6)
+    Dog_R8_R6 = GBlur_R1.diffOfGauus(Gaus_R6, Gaus_R8)
     # index1 = np.where(Dog_R2_R1 < -100)
     # index2 = np.where(Dog_R4_R2 < -20)
     # index3 = np.where(Dog_R8_R6 < -1.5)
@@ -47,7 +54,7 @@ def generateFeatureMat(attribute):
     # Dog_R8_R6[index3] = 0
     featureList = [Gaus_R1, Gaus_R2, Gaus_R4,Grad_R1, Grad_R2, Grad_R4,
                    Dir_X_R1, Dir_X_R2, Dir_X_R4, Dir_Y_R1, Dir_Y_R2, Dir_Y_R4,
-                   Dog_R2_R1, Dog_R4_R2, Dog_R6_R4]
+                   Dog_R2_R1, Dog_R4_R2, Dog_R8_R6]
     return featureList
 
 # 将测井数据与地震数据转换为训练数据格式，方便加入15种特征

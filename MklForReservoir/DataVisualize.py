@@ -14,3 +14,15 @@ def visualize(xyData, predictedData):
     figure = dict(data=[trace],layout=layout)
     plotly.offline.plot(figure)
 
+def visualizeFeature(xyData, feature):
+    xList,yList = util.getXYrange(xyData)
+    zList = feature
+    layout = dict(width=600, height=800)
+    trace = go.Heatmap(z= zList,
+                       x= xList,
+                       y= yList)
+    # data = [trace]
+    figure = dict(data=[trace],layout=layout)
+    plotly.offline.plot(figure)
+
+
