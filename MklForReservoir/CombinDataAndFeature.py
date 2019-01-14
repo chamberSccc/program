@@ -55,14 +55,8 @@ def combinDataAndFeature(seisDataList, wellLogList, featureMatList,porosityList)
     seisTrainData = getSeisTrainData(seisDataList, featureMatList)
     #数据中如果波阻抗的数据为0,则删除改行数据
     # seisTrainData,index = delZeroData(seisTrainData, 4)
-    #根据对应index 删除label标签中的数据
     npPorosityList = np.array(porosityList)
     npPorosityList = npPorosityList[:,3]
-    # for i in index:
-    #     npPorosityList = np.delete(npPorosityList,i,axis=0)
-    # wellTrainData = getWellTrainData(seisTrainData, wellLogList)
-    # wellTrainData = np.delete(wellTrainData, 0, axis=1)
-    # wellTrainData = np.array(wellTrainData.tolist(), dtype=float)
     return seisTrainData,npPorosityList
 
 #返回测井训练数据列表,地震测试数据列表 按照15种特征顺序

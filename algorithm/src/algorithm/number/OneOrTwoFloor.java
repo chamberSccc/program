@@ -14,7 +14,7 @@ public class OneOrTwoFloor {
     int index = 0;
 
     //定义阈值
-    private final int threshold = 2000;
+    private final int threshold = 3000;
     private int upstair(int n){
         int sum = 0;
         for (int i = 0; i < threshold; i++) {

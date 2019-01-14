@@ -30,11 +30,11 @@ porosity_gauList = dp.por2array()
 #现在需要根据seisTrainData的坐标值,得到对应的label
 seisTrainData,labelData = comb.combinDataAndFeature(seisDataList,wellLogList,featureList,porosity_gauList)
 
-dv.visualize(seisTrainData, seisTrainData[:,9])
+dv.visualize(seisTrainData, seisTrainData[:,7])
 # 从3开始
-#3:gaussion_r1  4:gaussion_r2  5:gaussion_r4
-#6:grad_r1   7:grad_r2   8:grad_r4  9-14 direction_r1_r2_r4_x_y
-#15:dog_r2_r1   16:dog_r4_r2   17:dog_r8_r6
+#4:gaussion_r1  5:gaussion_r2  6:gaussion_r4
+#7:grad_r1   8:grad_r2   9:grad_r4  10-15 direction_r1_r2_r4_x_y
+#16:dog_r2_r1   17:dog_r4_r2   18:dog_r8_r6
 # dv.visualizeFeature(seisTrainData,featureList[2])
 aaa =  1
 
